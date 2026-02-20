@@ -2,12 +2,14 @@ package com.example.CusTomBatchBackend.dtos;
 
 import com.example.CusTomBatchBackend.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
+@Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Response {
 
@@ -33,5 +35,5 @@ public class Response {
     private TransactionDTO transaction;
     private List<TransactionDTO> transactions;
 
-    private final LocalDateTime timestamp;
+    private final LocalDateTime timestamp =LocalDateTime.now();
 }
