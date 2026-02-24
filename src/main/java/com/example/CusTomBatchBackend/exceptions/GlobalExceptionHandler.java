@@ -1,6 +1,5 @@
 package com.example.CusTomBatchBackend.exceptions;
 
-
 import com.example.CusTomBatchBackend.dtos.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +15,6 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .message("An unexpected error occurred: " + ex.getMessage())
                 .build();
-
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -24,31 +22,26 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Response> handleNotFoundException(NotFoundException ex) {
         Response response = Response.builder()
                 .status(HttpStatus.NOT_FOUND.value())
-                .message("An unexpected error occurred: " + ex.getMessage())
+                .message(ex.getMessage())
                 .build();
-
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(NotFoundException.class)
+    @ExceptionHandler(NameValueRequiredException.class)
     public ResponseEntity<Response> handleNameValueRequiredException(NameValueRequiredException ex) {
         Response response = Response.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
-                .message("An unexpected error occurred: " + ex.getMessage())
+                .message(ex.getMessage())
                 .build();
-
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(NotFoundException.class)
+    @ExceptionHandler(InvalidCredentialsException.class)
     public ResponseEntity<Response> handleInvalidCredentialsException(InvalidCredentialsException ex) {
         Response response = Response.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
-                .message("An unexpected error occurred: " + ex.getMessage())
+                .message(ex.getMessage())
                 .build();
-
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
-
-
 }
